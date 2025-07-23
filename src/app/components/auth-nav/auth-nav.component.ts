@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { Menubar } from 'primeng/menubar';
 import { MenubarModule } from 'primeng/menubar';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-auth-nav',
   standalone: true,
-  imports: [Menubar,MenubarModule],
+ imports: [MenubarModule, CommonModule],
   templateUrl: './auth-nav.component.html',
   styleUrl: './auth-nav.component.scss',
 })
@@ -16,16 +16,15 @@ export class AuthNavComponent implements OnInit {
 
     this.items = [
       {
-        label: 'Home',
-        icon: 'pi pi-home',
+        label: 'Login',
+        icon: 'pi pi-sign-in',
+        path:'/login',
       },
       {
-        label: 'Features',
-        icon: 'pi pi-star',
-      },
-      {
-        label: 'Contact',
-        icon: 'pi pi-envelope',
+        label: 'Register',
+        icon: 'pi pi-user-plus',
+        path:'/register',
+
       },
     ];
   }

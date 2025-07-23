@@ -1,3 +1,17 @@
 <div class="card">
-    <p-menubar [model]="items" />
+  <p-menubar>
+    <ng-template pTemplate="start">
+      <h3>Hello E-commerce</h3>
+    </ng-template>
+    <ng-template pTemplate="end">
+      @for (item of items; track $index) {
+      <a [routerLink]="[item?.['path']]"
+         pRipple class="p-menuitem-link  p-link inline-flex justify-content-center align-items-center text-black-alpha-70
+          hover:surface-50 transition-all transition-duration-200 p-2">
+        <span [class]="item.icon"></span>
+        <span class="ml-2">{{ item.label }}</span>
+      </a>
+      }
+    </ng-template>
+  </p-menubar>
 </div>
