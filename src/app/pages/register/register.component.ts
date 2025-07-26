@@ -3,9 +3,10 @@ import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModu
 import { InputTextModule } from 'primeng/inputtext';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { ButtonModule } from 'primeng/button';
 @Component({
   selector: 'app-register',
-  imports: [FormsModule,ReactiveFormsModule , InputGroupModule, InputGroupAddonModule, InputTextModule],
+  imports: [FormsModule, ReactiveFormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, ButtonModule,],
   standalone: true,
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
@@ -26,7 +27,7 @@ export class RegisterComponent {
     this.name = new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(20)]);
     this.email = new FormControl("", [Validators.required, Validators.email]);
     this.password = new FormControl("", [Validators.required]);
-    this.rePassword = new FormControl("", [Validators.required,this.passwordMatch(this.password)]);
+    this.rePassword = new FormControl("", [Validators.required, this.passwordMatch(this.password)]);
   }
 
   initFormGroup() {
@@ -45,6 +46,9 @@ export class RegisterComponent {
     }
   }
 
+  submit(){
+    console.log(this.registerForm.value);
+  }
 
 
 
