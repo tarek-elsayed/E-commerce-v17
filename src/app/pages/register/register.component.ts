@@ -1,5 +1,13 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
@@ -10,14 +18,26 @@ import { AuthService } from '../../core/service/auth.service';
 import { Iregister } from '../../core/intergaces/iregister';
 import { ToastModule } from 'primeng/toast';
 import { RippleModule } from 'primeng/ripple';
-
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import {  Router } from '@angular/router';
 @Component({
   selector: 'app-register',
-  imports: [FormsModule, ReactiveFormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, ButtonModule, MessagesModule, ToastModule, RippleModule],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    InputGroupModule,
+    InputGroupAddonModule,
+    InputTextModule,
+    ButtonModule,
+    MessagesModule,
+    ToastModule,
+    RippleModule,
+    NgxSpinnerModule,
+  ],
   standalone: true,
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
-  providers: [MessageService]
+  providers: [MessageService],
 })
 export class RegisterComponent {
   name!: FormControl;
@@ -27,7 +47,12 @@ export class RegisterComponent {
   registerForm!: FormGroup;
   messages!: Message[];
 
-  constructor(private _authService: AuthService, private messageService: MessageService) {
+  constructor(
+    private _authService: AuthService,
+    private _messageService: MessageService,
+    private _spinner: NgxSpinnerService,
+    private _router: Router
+  ) {
     this.initFormControl();
     this.initFormGroup();
   }
@@ -36,10 +61,23 @@ export class RegisterComponent {
     this.messages = [{ severity: 'info', detail: 'Message Content' }];
   }
   initFormControl() {
-    this.name = new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(20)]);
-    this.email = new FormControl("", [Validators.required, Validators.email]);
-    this.password = new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(20)]);
-    this.rePassword = new FormControl("", [Validators.required, this.passwordMatch(this.password), Validators.minLength(3), Validators.maxLength(20)]);
+    this.name = new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(20),
+    ]);
+    this.email = new FormControl('', [Validators.required, Validators.email]);
+    this.password = new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(20),
+    ]);
+    this.rePassword = new FormControl('', [
+      Validators.required,
+      this.passwordMatch(this.password),
+      Validators.minLength(3),
+      Validators.maxLength(20),
+    ]);
   }
 
   initFormGroup() {
@@ -48,22 +86,20 @@ export class RegisterComponent {
       email: this.email,
       password: this.password,
       rePassword: this.rePassword,
-    })
+    });
   }
   passwordMatch(pass: AbstractControl): ValidatorFn {
     return (rePass: AbstractControl): null | { [key: string]: boolean } => {
       if (pass.value !== rePass.value) {
-        return { passNotMatch: true }
+        return { passNotMatch: true };
       } else return null;
-    }
+    };
   }
 
   submit() {
     if (this.registerForm.valid) {
-      console.log(this.registerForm);
       this.singUp(this.registerForm.value);
     } else {
-      console.log("first")
       this.registerForm.markAllAsTouched();
       Object.keys(this.registerForm.controls).forEach((control) => {
         this.registerForm.controls[control].markAsDirty();
@@ -72,28 +108,26 @@ export class RegisterComponent {
   }
 
   singUp(data: Iregister) {
+    this._spinner.show();
     this._authService.register(data).subscribe({
-      next: (res)=>{
-       if(res._id){
-         this.showToster('success','Success','Success Register');
-       }
+      next: (res) => {
+        this._spinner.hide();
+        if (res._id) {
+          this.showToster('success', 'Success', 'Success Register');
+        }
+        this._router.navigate(['login'])
       },
-      error:(err)=>{
-        console.log(err);
-
-         this.showToster('error','Error',err.error.error);
-      }
-    })
+      error: (err) => {
+        this._spinner.hide();
+        this.showToster('error', 'Error', err.error.error);
+      },
+    });
   }
-  showToster(
-    severity: string,
-    summary: string,
-    detail: string,
-) {
-    this.messageService.add({ severity: severity, summary: summary, detail: detail });
+  showToster(severity: string, summary: string, detail: string) {
+    this._messageService.add({
+      severity: severity,
+      summary: summary,
+      detail: detail,
+    });
   }
-
-
-
-
 }
