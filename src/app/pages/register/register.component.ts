@@ -4,12 +4,20 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { ButtonModule } from 'primeng/button';
+import { MessagesModule } from 'primeng/messages';
+import { Message, MessageService } from 'primeng/api';
+import { AuthService } from '../../core/service/auth.service';
+import { Iregister } from '../../core/intergaces/iregister';
+import { ToastModule } from 'primeng/toast';
+import { RippleModule } from 'primeng/ripple';
+
 @Component({
   selector: 'app-register',
-  imports: [FormsModule, ReactiveFormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, ButtonModule,],
+  imports: [FormsModule, ReactiveFormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, ButtonModule, MessagesModule, ToastModule, RippleModule],
   standalone: true,
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
+  providers: [MessageService]
 })
 export class RegisterComponent {
   name!: FormControl;
@@ -17,17 +25,21 @@ export class RegisterComponent {
   password!: FormControl;
   rePassword!: FormControl;
   registerForm!: FormGroup;
+  messages!: Message[];
 
-  constructor() {
+  constructor(private _authService: AuthService, private messageService: MessageService) {
     this.initFormControl();
     this.initFormGroup();
   }
 
+  ngOnInit() {
+    this.messages = [{ severity: 'info', detail: 'Message Content' }];
+  }
   initFormControl() {
     this.name = new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(20)]);
     this.email = new FormControl("", [Validators.required, Validators.email]);
-    this.password = new FormControl("", [Validators.required]);
-    this.rePassword = new FormControl("", [Validators.required, this.passwordMatch(this.password)]);
+    this.password = new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(20)]);
+    this.rePassword = new FormControl("", [Validators.required, this.passwordMatch(this.password), Validators.minLength(3), Validators.maxLength(20)]);
   }
 
   initFormGroup() {
@@ -46,8 +58,39 @@ export class RegisterComponent {
     }
   }
 
-  submit(){
-    console.log(this.registerForm.value);
+  submit() {
+    if (this.registerForm.valid) {
+      console.log(this.registerForm);
+      this.singUp(this.registerForm.value);
+    } else {
+      console.log("first")
+      this.registerForm.markAllAsTouched();
+      Object.keys(this.registerForm.controls).forEach((control) => {
+        this.registerForm.controls[control].markAsDirty();
+      });
+    }
+  }
+
+  singUp(data: Iregister) {
+    this._authService.register(data).subscribe({
+      next: (res)=>{
+       if(res._id){
+         this.showToster('success','Success','Success Register');
+       }
+      },
+      error:(err)=>{
+        console.log(err);
+
+         this.showToster('error','Error',err.error.error);
+      }
+    })
+  }
+  showToster(
+    severity: string,
+    summary: string,
+    detail: string,
+) {
+    this.messageService.add({ severity: severity, summary: summary, detail: detail });
   }
 
 
