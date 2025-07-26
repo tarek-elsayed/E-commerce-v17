@@ -1,7 +1,7 @@
 <section>
   <div class="container">
     <h1>Register Form</h1>
-    <form action="" [formGroup]="registerForm">
+    <form action="" [formGroup]="registerForm" (ngSubmit)="submit()">
       <div class="field">
         <p-inputGroup>
           <p-inputGroupAddon>
@@ -14,7 +14,7 @@
       <div class="field">
         <p-inputGroup>
           <p-inputGroupAddon>
-            <i class="pi pi-user"></i>
+            <i class="pi pi-at"></i>
           </p-inputGroupAddon>
           <input pInputText formControlName="email" placeholder="Email" />
         </p-inputGroup>
@@ -23,7 +23,7 @@
       <div class="field">
         <p-inputGroup>
           <p-inputGroupAddon>
-            <i class="pi pi-user"></i>
+            <i class="pi pi-lock"></i>
           </p-inputGroupAddon>
           <input pInputText formControlName="password" placeholder="Password" />
         </p-inputGroup>
@@ -32,11 +32,12 @@
       <div class="field">
         <p-inputGroup>
           <p-inputGroupAddon>
-            <i class="pi pi-user"></i>
+            <i class="pi pi-lock"></i>
           </p-inputGroupAddon>
           <input pInputText formControlName="rePassword" placeholder="Re-password" />
         </p-inputGroup>
       </div>
+      <p-button type="submit" label="Submit" />
     </form>
   </div>
 </section>
