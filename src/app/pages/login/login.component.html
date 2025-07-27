@@ -1,1 +1,79 @@
-<p>login works!</p>
+<section>
+  <div class="container my-8">
+    <h1 class="my-3 font-bold capitalize">Login Form</h1>
+    <form action="" [formGroup]="loginForm" (ngSubmit)="submit()">
+      <div class="field">
+        <p-inputGroup>
+          <p-inputGroupAddon>
+            <i class="pi pi-at"></i>
+          </p-inputGroupAddon>
+          <input pInputText formControlName="email" placeholder="email" />
+        </p-inputGroup>
+        <div class="validation-smg">
+          @if (email.dirty && email.touched) { @if (email.getError('required'))
+          {
+          <p-messages [value]="[
+              {
+                severity: 'error',
+                summary: 'validation Error',
+                detail: 'email is required'
+              }
+            ]" [enableService]="false" [closable]="false" />
+          } @if (email.getError('email')) {
+          <p-messages [value]="[
+              {
+                severity: 'error',
+                summary: 'validation Error',
+                detail: 'email is not vaild'
+              }
+            ]" [enableService]="false" [closable]="false" />
+          } }
+        </div>
+      </div>
+      <div class="field">
+        <p-inputGroup>
+          <p-inputGroupAddon>
+            <i class="pi pi-lock"></i>
+          </p-inputGroupAddon>
+          <input type="password" pInputText formControlName="password" placeholder="Password" />
+        </p-inputGroup>
+        <div class="validation-smg">
+          @if (password.dirty && password.touched) { @if
+          (password.getError('required')) {
+          <p-messages [value]="[
+              {
+                severity: 'error',
+                summary: 'validation Error',
+                detail: 'password is required'
+              }
+            ]" [enableService]="false" [closable]="false" />
+          } @if (password.getError('minlength')) {
+          <p-messages [value]="[
+              {
+                severity: 'info',
+                summary: 'validation Error',
+                detail: 'password must be at least 3 character'
+              }
+            ]" [enableService]="false" [closable]="false" />
+          } @if (password.getError('maxlength')) {
+          <p-messages [value]="[
+              {
+                severity: 'info',
+                summary: 'validation Error',
+                detail: 'password cant exceed 20 character'
+              }
+            ]" [enableService]="false" [closable]="false" />
+          } }
+        </div>
+      </div>
+      <p-button class="text-center" type="submit" label="Login" />
+    </form>
+  </div>
+  <div class="card flex justify-content-center">
+    <p-toast />
+    <!-- <p-button (onClick)="showToster()" label="Show" /> -->
+  </div>
+</section>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="blue" type="line-scale" [fullScreen]="true">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>
