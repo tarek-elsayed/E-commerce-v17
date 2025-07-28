@@ -3,20 +3,36 @@ import {
   AbstractControl,
   FormControl,
   FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { ButtonModule } from 'primeng/button';
+import { MessagesModule } from 'primeng/messages';
 import { Message, MessageService } from 'primeng/api';
 import { AuthService } from '../../core/service/auth.service';
 import { Iregister } from '../../core/intergaces/iregister';
-import { SharedModule } from '../../shared/moduls/shared/shared.module';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { Router } from '@angular/router';
-
+import { ToastModule } from 'primeng/toast';
+import { RippleModule } from 'primeng/ripple';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import {  Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   imports: [
-    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    InputGroupModule,
+    InputGroupAddonModule,
+    InputTextModule,
+    ButtonModule,
+    MessagesModule,
+    ToastModule,
+    RippleModule,
+    NgxSpinnerModule,
   ],
   standalone: true,
   templateUrl: './register.component.html',
@@ -33,10 +49,9 @@ export class RegisterComponent {
 
   constructor(
     private _authService: AuthService,
-    private messageService: MessageService,
+    private _messageService: MessageService,
     private _spinner: NgxSpinnerService,
-    private _router: Router,
-
+    private _router: Router
   ) {
     this.initFormControl();
     this.initFormGroup();
@@ -83,7 +98,6 @@ export class RegisterComponent {
 
   submit() {
     if (this.registerForm.valid) {
-      console.log(this.registerForm);
       this.singUp(this.registerForm.value);
     } else {
       this.registerForm.markAllAsTouched();
@@ -94,21 +108,23 @@ export class RegisterComponent {
   }
 
   singUp(data: Iregister) {
+    this._spinner.show();
     this._authService.register(data).subscribe({
       next: (res) => {
+        this._spinner.hide();
         if (res._id) {
           this.showToster('success', 'Success', 'Success Register');
         }
+        this._router.navigate(['login'])
       },
       error: (err) => {
-        console.log(err);
-
+        this._spinner.hide();
         this.showToster('error', 'Error', err.error.error);
       },
     });
   }
   showToster(severity: string, summary: string, detail: string) {
-    this.messageService.add({
+    this._messageService.add({
       severity: severity,
       summary: summary,
       detail: detail,
