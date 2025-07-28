@@ -1,39 +1,20 @@
 import { Component } from '@angular/core';
 import {
-  AbstractControl,
   FormControl,
   FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { InputTextModule } from 'primeng/inputtext';
-import { InputGroupModule } from 'primeng/inputgroup';
-import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
-import { ButtonModule } from 'primeng/button';
-import { MessagesModule } from 'primeng/messages';
-import { Message, MessageService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { AuthService } from '../../core/service/auth.service';
-import { Ilogin, Iregister } from '../../core/intergaces/iregister';
-import { ToastModule } from 'primeng/toast';
-import { RippleModule } from 'primeng/ripple';
-import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { Ilogin } from '../../core/intergaces/iregister';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
+import { SharedModule } from '../../shared/moduls/shared/shared.module';
 
 @Component({
   selector: 'app-login',
   imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    InputGroupModule,
-    InputGroupAddonModule,
-    InputTextModule,
-    ButtonModule,
-    MessagesModule,
-    ToastModule,
-    RippleModule,
-    NgxSpinnerModule,
+    SharedModule
   ],
   standalone: true,
   templateUrl: './login.component.html',
