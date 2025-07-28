@@ -19,7 +19,7 @@ import { Iregister } from '../../core/intergaces/iregister';
 import { ToastModule } from 'primeng/toast';
 import { RippleModule } from 'primeng/ripple';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   imports: [

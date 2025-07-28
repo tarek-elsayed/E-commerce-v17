@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
 import { CommonModule } from '@angular/common';
-import { RouterLinkActive } from '@angular/router';
 @Component({
   selector: 'app-auth-nav',
   standalone: true,
- imports: [MenubarModule, CommonModule],
+  imports: [MenubarModule, CommonModule],
   templateUrl: './auth-nav.component.html',
   styleUrl: './auth-nav.component.scss',
 })
@@ -19,12 +18,12 @@ export class AuthNavComponent implements OnInit {
       {
         label: 'Login',
         icon: 'pi pi-sign-in',
-        path:'/login',
+        path: '/login',
       },
       {
         label: 'Register',
         icon: 'pi pi-user-plus',
-        path:'/register',
+        path: '/register',
 
       },
     ];

@@ -29,15 +29,15 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   exports: [
     CommonModule,
     FormsModule,
-        ReactiveFormsModule,
-        InputGroupModule,
-        InputGroupAddonModule,
-        InputTextModule,
-        ButtonModule,
-        MessagesModule,
-        ToastModule,
-        RippleModule,
-        NgxSpinnerModule,
+    ReactiveFormsModule,
+    InputGroupModule,
+    InputGroupAddonModule,
+    InputTextModule,
+    ButtonModule,
+    MessagesModule,
+    ToastModule,
+    RippleModule,
+    NgxSpinnerModule,
   ]
 })
 export class SharedModule { }
