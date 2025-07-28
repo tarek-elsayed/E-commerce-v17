@@ -10,6 +10,8 @@ import { Message, MessageService } from 'primeng/api';
 import { AuthService } from '../../core/service/auth.service';
 import { Iregister } from '../../core/intergaces/iregister';
 import { SharedModule } from '../../shared/moduls/shared/shared.module';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -31,7 +33,10 @@ export class RegisterComponent {
 
   constructor(
     private _authService: AuthService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private _spinner: NgxSpinnerService,
+    private _router: Router,
+
   ) {
     this.initFormControl();
     this.initFormGroup();
@@ -81,7 +86,6 @@ export class RegisterComponent {
       console.log(this.registerForm);
       this.singUp(this.registerForm.value);
     } else {
-      console.log('first');
       this.registerForm.markAllAsTouched();
       Object.keys(this.registerForm.controls).forEach((control) => {
         this.registerForm.controls[control].markAsDirty();
