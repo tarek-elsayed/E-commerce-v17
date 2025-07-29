@@ -37,7 +37,6 @@ import { Router } from '@angular/router';
   standalone: true,
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
-  providers: [MessageService],
 })
 export class RegisterComponent {
   name!: FormControl;

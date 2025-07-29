@@ -9,6 +9,7 @@ import { MessagesModule } from 'primeng/messages';
 import { ToastModule } from 'primeng/toast';
 import { RippleModule } from 'primeng/ripple';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { MessageService } from 'primeng/api';
 
 
 
@@ -38,6 +39,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ToastModule,
     RippleModule,
     NgxSpinnerModule,
-  ]
+  ],
+  providers: [MessageService],
+
 })
 export class SharedModule { }

@@ -19,7 +19,6 @@ import { SharedModule } from '../../shared/moduls/shared/shared.module';
   standalone: true,
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
-  providers: [MessageService],
 })
 export class LoginComponent {
   email!: FormControl;
