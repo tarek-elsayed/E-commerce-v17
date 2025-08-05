@@ -7,7 +7,7 @@
           <p-inputGroupAddon>
             <i class="pi pi-at"></i>
           </p-inputGroupAddon>
-          <input pInputText formControlName="email" placeholder="email" />
+          <input pInputText [autofocus]="true" formControlName="email" placeholder="email" />
         </p-inputGroup>
         <div class="validation-smg">
           @if (email.dirty && email.touched) { @if (email.getError('required'))
