@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -8,35 +8,23 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { InputTextModule } from 'primeng/inputtext';
-import { InputGroupModule } from 'primeng/inputgroup';
-import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
-import { ButtonModule } from 'primeng/button';
-import { MessagesModule } from 'primeng/messages';
 import { Message, MessageService } from 'primeng/api';
 import { AuthService } from '../../core/service/auth.service';
 import { Iregister } from '../../core/intergaces/iregister';
-import { ToastModule } from 'primeng/toast';
-import { RippleModule } from 'primeng/ripple';
-import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
+import { SharedModule } from '../../shared/moduls/shared/shared.module';
 @Component({
   selector: 'app-register',
   imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    InputGroupModule,
-    InputGroupAddonModule,
-    InputTextModule,
-    ButtonModule,
-    MessagesModule,
-    ToastModule,
-    RippleModule,
-    NgxSpinnerModule,
+    SharedModule,
   ],
   standalone: true,
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
+  providers: [MessageService],
+  encapsulation: ViewEncapsulation.None,
+
 })
 export class RegisterComponent {
   name!: FormControl;
@@ -113,8 +101,12 @@ export class RegisterComponent {
         this._spinner.hide();
         if (res._id) {
           this.showToster('success', 'Success', 'Success Register');
+          const { email, password } = data;
+          this._authService.login({ email, password }).subscribe((next) => {
+            this._router.navigate(['user'])
+          })
         }
-        this._router.navigate(['login'])
+        this._spinner.hide();
       },
       error: (err) => {
         this._spinner.hide();

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -19,6 +19,8 @@ import { SharedModule } from '../../shared/moduls/shared/shared.module';
   standalone: true,
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
+  providers: [MessageService],
+  encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent {
   email!: FormControl;

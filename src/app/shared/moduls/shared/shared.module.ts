@@ -10,7 +10,7 @@ import { ToastModule } from 'primeng/toast';
 import { RippleModule } from 'primeng/ripple';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MessageService } from 'primeng/api';
-
+import { AutoFocusModule } from 'primeng/autofocus';
 
 
 @NgModule({
@@ -26,6 +26,7 @@ import { MessageService } from 'primeng/api';
     MessagesModule,
     ToastModule,
     RippleModule,
+    AutoFocusModule,
   ],
   exports: [
     CommonModule,
@@ -39,6 +40,7 @@ import { MessageService } from 'primeng/api';
     ToastModule,
     RippleModule,
     NgxSpinnerModule,
+    AutoFocusModule,
   ],
   providers: [MessageService],
 
