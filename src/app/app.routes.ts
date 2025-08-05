@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { authGarud } from './core/gaurds/auth.garud.guard';
+import { registerGuard } from './core/gaurds/register.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
@@ -21,6 +23,7 @@ export const routes: Routes = [
           import('./pages/register/register.component').then(
             (c) => c.RegisterComponent
           ),
+          canDeactivate:[registerGuard],
       },
     ],
   },
@@ -30,5 +33,6 @@ export const routes: Routes = [
       import('./layouts/user-layout/user-layout.component').then(
         (c) => c.UserLayoutComponent
       ),
-  },
+      canActivate:[authGarud],
+  }
 ];

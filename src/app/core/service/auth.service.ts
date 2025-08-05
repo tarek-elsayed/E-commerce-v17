@@ -19,4 +19,11 @@ export class AuthService {
   login(data: Ilogin): Observable<any> {
     return this._http.post(`${baseUrl}/api/users/auth`, data);
   }
+  authrized(): boolean {
+    if (localStorage.getItem('token') != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

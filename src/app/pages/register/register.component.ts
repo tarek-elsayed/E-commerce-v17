@@ -103,6 +103,7 @@ export class RegisterComponent {
           this.showToster('success', 'Success', 'Success Register');
           const { email, password } = data;
           this._authService.login({ email, password }).subscribe((next) => {
+            localStorage.setItem('token',res._id)
             this._router.navigate(['user'])
           })
         }
