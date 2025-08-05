@@ -65,9 +65,8 @@ export class LoginComponent {
     this._authService.login(data).subscribe({
       next: (res) => {
         if (res._id) {
-          console.log(res);
-
           this.showToster('success', 'Success', 'Success Login');
+          localStorage.setItem('token',res._id);
         }
         this._spinner.hide();
         this._router.navigate(['user'])
