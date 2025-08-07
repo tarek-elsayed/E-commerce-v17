@@ -28,7 +28,7 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'user',
+    path: '',
     loadComponent: () =>
       import('./layouts/user-layout/user-layout.component').then(
         (c) => c.UserLayoutComponent

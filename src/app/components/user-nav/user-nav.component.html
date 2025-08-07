@@ -22,21 +22,21 @@
           <i
             class="pi pi-shopping-cart text-3xl"
             pBadge
-
+            [value]="cartCount"
           ></i>
         </a>
         <a
           (click)="logout = !logout"
-          class="user-name p-3   font-bold capitalize relative cursor-pointer"
+          class="user-name p-3 font-bold capitalize relative cursor-pointer"
         >
-          <span>Tarek Elsayed</span>
+          <span>{{ userName }}</span>
 
           @if (logout) {
           <a
-
-            class="logout py-2 px-5   font-bold absolute left-50 flex align-items-center gap-3"
+            (click)="logOut()"
+            class="logout py-2 px-5 font-bold absolute left-50 flex align-items-center gap-3"
           >
-            <span>logout</span>
+            <span>Logout</span>
             <span class="pi pi-sign-out"> </span>
           </a>
           }
@@ -44,4 +44,8 @@
       </div>
     </ng-template>
   </p-menubar>
+</div>
+<div class="card flex justify-content-center">
+  <p-toast />
+  <!-- <p-button (onClick)="showToster()" label="Show" /> -->
 </div>
