@@ -8,6 +8,7 @@ import { Component, Input } from '@angular/core';
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss',
 })
+
 export class CardComponent {
   @Input({ required: true }) SmallCard: boolean = false;
   // hello

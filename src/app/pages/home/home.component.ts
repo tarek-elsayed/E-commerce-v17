@@ -8,6 +8,7 @@ import { CardComponent } from '../../shared/card/card/card.component';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
+
 export class HomeComponent implements OnInit {
   images: any[] | undefined;
 

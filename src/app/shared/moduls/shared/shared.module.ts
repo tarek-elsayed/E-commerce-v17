@@ -27,6 +27,7 @@ import { AutoFocusModule } from 'primeng/autofocus';
     ToastModule,
     RippleModule,
     AutoFocusModule,
+
   ],
   exports: [
     CommonModule,

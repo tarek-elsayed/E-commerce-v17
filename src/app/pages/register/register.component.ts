@@ -113,6 +113,7 @@ export class RegisterComponent {
         }
         this._spinner.hide();
       },
+
       error: (err) => {
         this._spinner.hide();
         this.showToster('error', 'Error', err.error.error);
