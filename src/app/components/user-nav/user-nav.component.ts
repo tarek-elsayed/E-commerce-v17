@@ -9,14 +9,23 @@ import { RippleModule } from 'primeng/ripple';
 import { UserDataService } from '../../core/service/user-data.service';
 import { AuthService } from '../../core/service/auth.service';
 import { Router } from '@angular/router';
-import { ToastModule } from "primeng/toast";
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-user-nav',
-  imports: [MenubarModule, BadgeModule, AvatarModule, InputTextModule, RippleModule, CommonModule, ToastModule],
+  imports: [
+    MenubarModule,
+    BadgeModule,
+    AvatarModule,
+    InputTextModule,
+    RippleModule,
+    CommonModule,
+    ToastModule,
+  ],
   standalone: true,
   templateUrl: './user-nav.component.html',
   styleUrl: './user-nav.component.scss',
+  providers: [MessageService],
 })
 export class UserNavComponent implements OnInit {
   items: MenuItem[] | undefined;
@@ -31,60 +40,56 @@ export class UserNavComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.getUserName();
+    this.getCartCount();
     this.items = [
       {
         label: 'Home',
-        icon: 'pi pi-home'
+        icon: 'pi pi-home',
+        path: 'home',
       },
       {
-        label: 'Features',
-        icon: 'pi pi-star'
+        label: 'Products',
+        icon: 'pi pi-sparkles',
+        path: 'products',
       },
       {
-        label: 'Projects',
-        icon: 'pi pi-search',
-        items: [
-          {
-            label: 'Core',
-            icon: 'pi pi-bolt',
-            shortcut: '⌘+S'
-          },
-          {
-            label: 'Blocks',
-            icon: 'pi pi-server',
-            shortcut: '⌘+B'
-          },
-          {
-            label: 'UI Kit',
-            icon: 'pi pi-pencil',
-            shortcut: '⌘+U'
-          },
-          {
-            separator: true
-          },
-          {
-            label: 'Templates',
-            icon: 'pi pi-palette',
-            items: [
-              {
-                label: 'Apollo',
-                icon: 'pi pi-palette',
-                badge: '2'
-              },
-              {
-                label: 'Ultima',
-                icon: 'pi pi-palette',
-                badge: '3'
-              }
-            ]
-          }
-        ]
+        label: 'Categories',
+        icon: 'pi pi-th-large',
+        path: 'categories',
       },
-      {
-        label: 'Contact',
-        icon: 'pi pi-envelope',
-        badge: '3'
-      }
     ];
+  }
+  getUserName(): void {
+    this._userData.userName.subscribe((name: string) => {
+      this.userName = name;
+    });
+  }
+  getCartCount() {
+    const userId = localStorage.getItem('token') ?? '';
+
+    this._userData.getCartCount(userId).subscribe((res: any) => {
+      console.log(res.cart.length);
+      this.cartCount = res.cart.length;
+    });
+  }
+
+  logOut(): void {
+    this._auth.logOutUser().subscribe((res: any) => {
+      if (res) {
+        this.showToster('warn', 'Warn', res.message);
+        localStorage.removeItem('token');
+        localStorage.removeItem('userName');
+        this._router.navigate(['login']);
+      }
+      // this._router.navigate(['login'])
+    });
+  }
+  showToster(severity: string, summary: string, detail: string) {
+    this._messageService.add({
+      severity: severity,
+      summary: summary,
+      detail: detail,
+    });
   }
 }
