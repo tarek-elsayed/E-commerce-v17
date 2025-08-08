@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, } from 'rxjs';
 import { baseUrl } from '../apiRoot/baseUrl';
-import { Ilogin, Iregister } from '../intergaces/iregister';
+import { Ilogin, Iregister } from '../intergaces/http';
 
 @Injectable({
   providedIn: 'root'

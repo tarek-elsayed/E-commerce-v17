@@ -6,7 +6,7 @@ import {
 } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { AuthService } from '../../core/service/auth.service';
-import { Ilogin } from '../../core/intergaces/iregister';
+import { Ilogin } from '../../core/intergaces/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { SharedModule } from '../../shared/moduls/shared/shared.module';

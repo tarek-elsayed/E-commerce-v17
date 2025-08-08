@@ -10,7 +10,7 @@ import {
 } from '@angular/forms';
 import { Message, MessageService } from 'primeng/api';
 import { AuthService } from '../../core/service/auth.service';
-import { Iregister } from '../../core/intergaces/iregister';
+import { Iregister } from '../../core/intergaces/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { SharedModule } from '../../shared/moduls/shared/shared.module';
