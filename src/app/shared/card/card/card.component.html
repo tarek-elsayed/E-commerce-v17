@@ -1,0 +1,46 @@
+<div class="flex justify-content-between align-items-center flex-wrap">
+  @for (item of SmallCard?[0,0,0,0]:[0,0,0,0,5,8,9,7]; track $index) {
+  <div
+    [ngClass]="{ 'col-6': SmallCard, 'col-12 md:col-3 lg:col-2': !SmallCard }"
+  >
+    <div
+      [ngClass]="{
+        'flex flex-wrap lg:flex-nowrap justify-content-center gap-2': SmallCard
+      }"
+    >
+      <figure
+        [ngClass]="{ 'md:w-6rem lg:w-12rem': SmallCard, 'w-full': !SmallCard }"
+        class="m-1 shadow-2 border-round-2xl overflow-hidden lg:w-12rem md:w-6rem"
+      >
+        <img
+          class="w-full h-full"
+          src="../../../assets/categories/gaming.jpg"
+          alt=""
+        />
+      </figure>
+      <div class="content py-1">
+        <p class="truncateText overflow-hidden font-medium text-xs">
+          gaming.jpg gaming.jpg gaming.jpg gaming.jpg gaming.jpg gaming.jpg
+          gaming.jpg gaming.jpg
+        </p>
+        <div class="flex align-items-center gap-2">
+          <div class="price flex gap-2 align-items-center pb-2">
+            <span>
+              <del class="text-color-secondary">14</del>
+            </span>
+            <span class="new-price font-bold">
+              <span class="text-green-400 pr-1">$</span>14
+            </span>
+          </div>
+          <div class="offer">
+            <span class="bg-red-500 p-1 border-circle text-white text-sm"
+              >%3</span
+            >
+            <span class="font-bold text-xs px-1">offer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>
