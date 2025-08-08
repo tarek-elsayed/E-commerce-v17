@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './auth-nav.component.html',
   styleUrl: './auth-nav.component.scss',
 })
+
 export class AuthNavComponent implements OnInit {
   items: MenuItem[] | undefined;
 

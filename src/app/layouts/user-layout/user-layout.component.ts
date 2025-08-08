@@ -10,4 +10,5 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './user-layout.component.html',
   styleUrl: './user-layout.component.scss',
 })
+
 export class UserLayoutComponent {}

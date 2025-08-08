@@ -10,6 +10,7 @@ export class UserDataService {
     localStorage.getItem('userName') || ''
   );
 
+
   constructor(private _httpClient: HttpClient) { }
 
   getCartCount(userId: string): Observable<any> {

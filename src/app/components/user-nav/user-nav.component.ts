@@ -40,6 +40,7 @@ export class UserNavComponent implements OnInit {
     private _messageService: MessageService,
     private _router: Router
   ) {}
+
   ngOnInit() {
     this.getUserName();
     this.getCartCount();
