@@ -10,4 +10,6 @@ import { Component, Input } from '@angular/core';
 })
 export class CardComponent {
   @Input({ required: true }) SmallCard: boolean = false;
+  // hello
+
 }
