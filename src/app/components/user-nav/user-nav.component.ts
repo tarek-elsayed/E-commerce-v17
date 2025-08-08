@@ -1,21 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
 import { BadgeModule } from 'primeng/badge';
 import { AvatarModule } from 'primeng/avatar';
 import { InputTextModule } from 'primeng/inputtext';
 import { CommonModule } from '@angular/common';
 import { RippleModule } from 'primeng/ripple';
+import { UserDataService } from '../../core/service/user-data.service';
+import { AuthService } from '../../core/service/auth.service';
+import { Router } from '@angular/router';
+import { ToastModule } from "primeng/toast";
 
 @Component({
   selector: 'app-user-nav',
-  imports: [MenubarModule, BadgeModule, AvatarModule, InputTextModule, RippleModule, CommonModule],
+  imports: [MenubarModule, BadgeModule, AvatarModule, InputTextModule, RippleModule, CommonModule, ToastModule],
   standalone: true,
   templateUrl: './user-nav.component.html',
   styleUrl: './user-nav.component.scss',
 })
 export class UserNavComponent implements OnInit {
   items: MenuItem[] | undefined;
+  logout: boolean = false;
+  userName: string = '';
+  cartCount: number = 0;
+  constructor(
+    private _userData: UserDataService,
+    private _auth: AuthService,
+    private _messageService: MessageService,
+    private _router: Router
+  ) {}
 
   ngOnInit() {
     this.items = [

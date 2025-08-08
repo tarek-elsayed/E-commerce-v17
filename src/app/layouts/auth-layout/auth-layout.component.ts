@@ -4,6 +4,7 @@ import { AuthFooterComponent } from "../../components/auth-footer/auth-footer.co
 import { RouterOutlet } from '@angular/router';
 import { MenubarModule } from 'primeng/menubar';
 
+
 @Component({
   selector: 'app-auth-layout',
   standalone:true,

@@ -7,4 +7,5 @@ export const registerGuard: CanDeactivateFn<RegisterComponent> = (component, cur
     return alert;
   }
   return true;
+
 };

@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
   templateUrl: './user-footer.component.html',
   styleUrl: './user-footer.component.scss'
 })
+
 export class UserFooterComponent {
 
 }

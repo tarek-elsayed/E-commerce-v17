@@ -11,6 +11,7 @@ import { PopularPipe } from '../../core/pipe/popular.pipe';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
+
 export class HomeComponent implements OnInit {
   images: any[] | undefined;
   smallProducts: IProducts[] = [];
