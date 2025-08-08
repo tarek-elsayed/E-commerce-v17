@@ -77,6 +77,7 @@ export class UserNavComponent implements OnInit {
   }
 
   logOut(): void {
+
     this._auth.logOutUser().subscribe((res: any) => {
       if (res) {
         this.showToster('warn', 'Warn', res.message);
