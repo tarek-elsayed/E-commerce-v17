@@ -72,6 +72,7 @@ export class UserNavComponent implements OnInit {
 
     this._userData.getCartCount(userId).subscribe((res: any) => {
       console.log(res.cart.length);
+      console.log(res.cart.length);
       this.cartCount = res.cart.length;
     });
   }
