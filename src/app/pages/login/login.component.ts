@@ -4,6 +4,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+
 import { MessageService } from 'primeng/api';
 import { AuthService } from '../../core/service/auth.service';
 import { Ilogin } from '../../core/intergaces/http';
@@ -69,7 +70,7 @@ export class LoginComponent {
           localStorage.setItem('token',res._id);
         }
         this._spinner.hide();
-        this._router.navigate(['user'])
+        this._router.navigate(['home'])
       },
       error: (err) => {
         this._spinner.hide();

@@ -10,4 +10,5 @@ import { HomeComponent } from "../../pages/home/home.component";
   templateUrl: './user-layout.component.html',
   styleUrl: './user-layout.component.scss',
 })
+
 export class UserLayoutComponent {}

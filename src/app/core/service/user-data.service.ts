@@ -11,7 +11,8 @@ export class UserDataService {
     localStorage.getItem('userName') || ''
   );
 
-  constructor(private _httpClient: HttpClient) {}
+
+  constructor(private _httpClient: HttpClient) { }
 
   getCartCount(userId: string): Observable<any> {
     return this._httpClient.get(
