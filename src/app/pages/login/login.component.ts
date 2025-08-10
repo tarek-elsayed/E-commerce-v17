@@ -70,7 +70,7 @@ export class LoginComponent {
           localStorage.setItem('token',res._id);
         }
         this._spinner.hide();
-        this._router.navigate(['user'])
+        this._router.navigate(['home'])
       },
       error: (err) => {
         this._spinner.hide();
