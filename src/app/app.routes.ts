@@ -35,6 +35,7 @@ export const routes: Routes = [
       ),
     canActivate: [authGarud],
     children: [
+
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       {
         path: 'home',
