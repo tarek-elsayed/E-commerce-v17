@@ -1,12 +1,11 @@
 import { NgClass } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { UserDataService } from '../../../core/service/user-data.service';
 import { IProducts } from '../../../core/intergaces/http';
-
+import { ButtonModule } from 'primeng/button';
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [NgClass],
+  imports: [NgClass,ButtonModule],
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss',
 })

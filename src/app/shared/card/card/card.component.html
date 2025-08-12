@@ -1,7 +1,7 @@
 <div class="flex justify-content-between align-items-center flex-wrap">
   @for (item of Products; track $index) {
   <div
-    [ngClass]="{ 'col-6': SmallCard, 'col-12 md:col-3 lg:col-2': !SmallCard }"
+    [ngClass]="{ 'col-6': SmallCard, 'col-12 md:col-4 lg:col-3': !SmallCard }"
   >
     <div
       [ngClass]="{
@@ -46,6 +46,11 @@
           </div>
         </div>
       </div>
+      @if(!SmallCard){
+        <p-button label="Add to Cart" severity="warning"
+        styleClass="my-2 uppercase w-full "
+        icon="pi pi-cart-plus text-2xl" iconPos="right"/>
+      }
     </div>
   </div>
   }
