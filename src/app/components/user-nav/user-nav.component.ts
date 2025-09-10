@@ -41,7 +41,7 @@ export class UserNavComponent implements OnInit {
 
   ngOnInit() {
     this.getUserName();
-    this.getCartCount();
+    // this.getCartCount();
     this.items = [
       {
         label: 'Home',
@@ -65,15 +65,15 @@ export class UserNavComponent implements OnInit {
       this.userName = name;
     });
   }
-  getCartCount() {
-    const userId = localStorage.getItem('token') ?? '';
+  // getCartCount() {
+  //   const userId = localStorage.getItem('token') ?? '';
 
-    this._userData.getCartCount(userId).subscribe((res: any) => {
-      console.log(res.cart.length);
-      console.log(res.cart.length);
-      this.cartCount = res.cart.length;
-    });
-  }
+  //   this._userData.getCartCount(userId).subscribe((res: any) => {
+  //     console.log(res.cart.length);
+  //     console.log(res.cart.length);
+  //     this.cartCount = res.cart.length;
+  //   });
+  // }
 
   logOut(): void {
     this._auth.logOutUser().subscribe((res: any) => {

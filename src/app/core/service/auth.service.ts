@@ -14,11 +14,15 @@ export class AuthService {
 
 
   register(data: Iregister): Observable<any> {
-    return this._http.post(`${baseUrl}/api/users`, data)
+    return this._http.post(`https://fakestoreapi.com/users`, data)
   }
   login(data: Ilogin): Observable<any> {
-    return this._http.post(`${baseUrl}/api/users/auth`, data);
+    return this._http.post(`https://fakestoreapi.com/auth/login`, data);
   }
+  getUserById(id: number){
+    return this._http.get(`https://fakestoreapi.com/users/1`)
+  }
+
   authrized(): boolean {
     if (localStorage.getItem('token') != null) {
       return true;

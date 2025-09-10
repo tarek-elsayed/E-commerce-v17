@@ -24,7 +24,7 @@ import { SharedModule } from '../../shared/moduls/shared/shared.module';
   encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent {
-  email!: FormControl;
+  username!: FormControl;
   password!: FormControl;
   loginForm!: FormGroup;
   constructor(
@@ -38,8 +38,8 @@ export class LoginComponent {
   }
 
   initFormControl() {
-    this.email = new FormControl('', [Validators.required, Validators.email]);
-    this.password = new FormControl('', [
+    this.username = new FormControl('johnd', [Validators.required, ]);
+    this.password = new FormControl('m38rmF$', [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(20),
@@ -47,7 +47,7 @@ export class LoginComponent {
   }
   initFormGroup() {
     this.loginForm = new FormGroup({
-      email: this.email,
+      username: this.username,
       password: this.password,
     });
   }
@@ -65,9 +65,10 @@ export class LoginComponent {
     this._spinner.show();
     this._authService.login(data).subscribe({
       next: (res) => {
-        if (res._id) {
+        if (res) {
           this.showToster('success', 'Success', 'Success Login');
-          localStorage.setItem('token',res._id);
+          localStorage.setItem('token',res.token);
+          this.getUserData()
         }
         this._spinner.hide();
         this._router.navigate(['home'])
@@ -77,6 +78,12 @@ export class LoginComponent {
         this.showToster('error', 'Error', err.error.error);
       },
     });
+  }
+  getUserData(){
+    this._authService.getUserById(1).subscribe((e:any)=>{
+      console.log(e);
+      localStorage.setItem('username',e.username);
+    })
   }
 
 

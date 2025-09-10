@@ -8,19 +8,19 @@
           <p-inputGroupAddon>
             <i class="pi pi-at"></i>
           </p-inputGroupAddon>
-          <input pInputText [autofocus]="true" formControlName="email" placeholder="email" />
+          <input pInputText [autofocus]="true" formControlName="username" placeholder="email" />
         </p-inputGroup>
         <div class="validation-smg">
-          @if (email.dirty && email.touched) { @if (email.getError('required'))
+          @if (username.dirty && username.touched) { @if (username.getError('required'))
           {
           <p-messages [value]="[
               {
                 severity: 'error',
                 summary: 'validation Error',
-                detail: 'email is required'
+                detail: 'username is required'
               }
             ]" [enableService]="false" [closable]="false" />
-          } @if (email.getError('email')) {
+          } @if (username.getError('username')) {
           <p-messages [value]="[
               {
                 severity: 'error',

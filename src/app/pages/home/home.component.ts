@@ -6,7 +6,7 @@ import { IProducts } from '../../core/intergaces/http';
 import { PopularPipe } from '../../core/pipe/popular.pipe';
 @Component({
   selector: 'app-home',
-  imports: [GalleriaModule, CardComponent,PopularPipe],
+  imports: [GalleriaModule, CardComponent],
   standalone: true,
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',

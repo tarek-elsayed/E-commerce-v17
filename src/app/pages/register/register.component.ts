@@ -59,12 +59,12 @@ export class RegisterComponent {
       Validators.minLength(3),
       Validators.maxLength(20),
     ]);
-    this.rePassword = new FormControl('', [
-      Validators.required,
-      this.passwordMatch(this.password),
-      Validators.minLength(3),
-      Validators.maxLength(20),
-    ]);
+    // this.rePassword = new FormControl('', [
+    //   Validators.required,
+    //   this.passwordMatch(this.password),
+    //   Validators.minLength(3),
+    //   Validators.maxLength(20),
+    // ]);
   }
 
   initFormGroup() {
@@ -72,7 +72,7 @@ export class RegisterComponent {
       name: this.name,
       email: this.email,
       password: this.password,
-      rePassword: this.rePassword,
+      // rePassword: this.rePassword,
     });
   }
   passwordMatch(pass: AbstractControl): ValidatorFn {
@@ -99,12 +99,13 @@ export class RegisterComponent {
     this._authService.register(data).subscribe({
       next: (res) => {
         this._spinner.hide();
-        if (res._id) {
+        if (res) {
           this.showToster('success', 'Success', 'Success Register');
-          const { email, password } = data;
-          this._authService.login({ email, password }).subscribe((next) => {
-            localStorage.setItem('token',res._id)
-            this._router.navigate(['user'])
+          const { name, password } = data;
+          this._authService.login({username: 'johnd',password: 'm38rmF$' }).subscribe((next) => {
+            localStorage.setItem('token',next.token)
+           this.getUserData(res);
+            this._router.navigate(['home'])
           })
         }
         this._spinner.hide();
@@ -115,6 +116,12 @@ export class RegisterComponent {
         this.showToster('error', 'Error', err.error.error);
       },
     });
+  }
+  getUserData(id:number){
+    this._authService.getUserById(id).subscribe((e:any)=>{
+      console.log(e);
+      localStorage.setItem('username',e.username);
+    })
   }
   showToster(severity: string, summary: string, detail: string) {
     this._messageService.add({

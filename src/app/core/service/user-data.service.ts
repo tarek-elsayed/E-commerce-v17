@@ -8,7 +8,7 @@ import { baseUrl } from '../apiRoot/baseUrl';
 })
 export class UserDataService {
   userName: BehaviorSubject<string> = new BehaviorSubject<string>(
-    localStorage.getItem('userName') || ''
+    localStorage.getItem('username') || ''
   );
 
 
@@ -20,6 +20,6 @@ export class UserDataService {
     );
   }
   getAllProducts(): Observable<any> {
-    return this._httpClient.get(`${baseUrl}/get`);
+    return this._httpClient.get(`https://fakestoreapi.com/products`);
   }
 }
